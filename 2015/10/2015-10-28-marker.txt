@@ -1,0 +1,7 @@
+https://github.com/rsvp/victor
+commit f1e616076764c468452169bbcf251355c397d1ee
+Date:   Wed, 28 Oct 2015 15:01:43 -0700
+Bump VERSION to v1.15.1028
+
+Marker: https://bitbucket.org/snippets/rsvp/9qeyL
+
