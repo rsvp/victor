@@ -1,5 +1,7 @@
 # victor
 
+[![Join the chat at https://gitter.im/rsvp/victor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rsvp/victor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Victor, familiar name in cryptography to denote **VERIFIER**, 
 serves to publicly timestamp hash fingerprints of files. 
 
