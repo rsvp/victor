@@ -67,7 +67,8 @@ by committing a text file to **victor** under
 the proper year/month directory. 
 Mention of a *marker* site is minimally useful to collaborate 
 any claimed date and time (taking into account time zones). 
-In our example, supplementary information has been included:
+In our example, supplementary information has been included 
+(helpful in a search of the repository): 
 
 ```
 https://github.com/rsvp/victor
@@ -80,14 +81,20 @@ Marker: https://bitbucket.org/snippets/rsvp/9qeyL
 
 We have essentially added another timestamp to our commit by a 
 third-party marker which can be verified by visiting that link. 
-Thus we can definitively conclude that any commits thereafter 
+Thus we can definitively conclude that any hash registered thereafter 
 would be dated 2015-10-28 or later. 
-Prior commits would clearly have occurred on or before said date. 
+Prior entries would clearly have occurred on or before said date. 
+
+The encoded timestamp from victor is 
+[bdc5efb645764ec11cd6154d464c3269d47cb52a](https://github.com/rsvp/victor/commit/bdc5efb645764ec11cd6154d464c3269d47cb52a) 
+which is the SHA-1 digest produced by git of a commit 
+mentioning the hash to be registered plus any supplementary 
+information inclusive of a time marker. 
 Obviously any true clone of victor must contain 
-the forementioned hash code. 
+the forementioned hash code [$ git log]. 
 
 Given a series of such commits we are building a verifiable 
-timeline built by diverse people with an ordered trace of 
+timeline built by diverse people with an ordered trail of 
 authenticity provided by open markers on the network and 
 the design of the git version control software. 
 
@@ -119,7 +126,7 @@ Timestamps based on the X9.95 standard can be used to provide [*victor* comments
 - Evidentiary trail of authenticity. 
   [*A document's hash and a time marker jointly produces another hash, 
   git's commit identifier. Has the history of git commits been tested 
-  in court for legal sufficiency? *] 
+  in court for legal sufficiency?*] 
 
 "**Linked timestamping** creates tokens [*markers*] 
 which are dependent on each other, entangled into some 
@@ -129,8 +136,8 @@ Temporal order of issued timestamps is also protected by this data structure,
 making backdating of the issued timestamps impossible, 
 even by the issuing server itself." 
 
-[*The issued timestamps from victor are in fact the 
+Summary: **The issued timestamps from *victor* are in fact the 
 git SHA-1 commit identifiers. By examining the git log, 
 the hash or signature of the original document can be recovered 
-along with verifiable time parameters.*] 
+along with verifiable time parameters.**
 
