@@ -58,9 +58,6 @@ victor's last state to a blockchain for another source of
 independent timestamping. 
 Please kindly commit a signed announcement to that effect. 
 
-Reference: Bruce Schneier, *Applied Cryptography*, 
-1996 second edition, see esp. chapter 4.1.
-
 
 ### Practical example
 
@@ -84,12 +81,56 @@ Marker: https://bitbucket.org/snippets/rsvp/9qeyL
 We have essentially added another timestamp to our commit by a 
 third-party marker which can be verified by visiting that link. 
 Thus we can definitively conclude that any commits thereafter 
-would be dated 2015-10-28 or later. It goes without saying 
-that any true clone of victor must necessarily contain 
+would be dated 2015-10-28 or later. 
+Prior commits would clearly have occurred on or before said date. 
+Obviously any true clone of victor must contain 
 the forementioned hash code. 
 
 Given a series of such commits we are building a verifiable 
 timeline built by diverse people with an ordered trace of 
 authenticity provided by open markers on the network and 
 the design of the git version control software. 
+
+
+### References
+
+- Bruce Schneier, *Applied Cryptography*, 1996 second edition, see esp. chapter 4.1.
+
+- Trusted timestamping: https://en.wikipedia.org/wiki/Trusted_timestamping 
+  see esp. [ANSI ASC X9.95 Standard](https://en.wikipedia.org/wiki/ANSI_ASC_X9.95_Standard) 
+  and [Linked timestamping](https://en.wikipedia.org/wiki/Linked_timestamping). 
+
+
+### Appendix 1: Standards
+
+Timestamps based on the X9.95 standard can be used to provide [*victor* comments]:
+
+- Authenticity: trusted, non-refutable time when data was digitally signed. 
+  [*victor presumes GitHub and markers use trusted time sources, e.g. NIST. 
+  Note that victor does not hash or check the original document itself, 
+  that's the committer's responsibility.*] 
+
+- Integrity: protection of the timestamp from tampering without detection. 
+  [*victor relies on the git's hash tree structure for integrity.*]
+
+- Timeliness: proof that the time of the digital signature was the actual time. 
+  [*victor timeline provides excellent approximation.*] 
+
+- Evidentiary trail of authenticity. 
+  [*A document's hash and a time marker jointly produces another hash, 
+  git's commit identifier. Has the history of git commits been tested 
+  in court for legal sufficiency? *] 
+
+"**Linked timestamping** creates tokens [*markers*] 
+which are dependent on each other, entangled into some 
+authenticated data structure [*git hash tree* by GitHub users]. 
+Later modification of issued timestamps would invalidate this structure. 
+Temporal order of issued timestamps is also protected by this data structure, 
+making backdating of the issued timestamps impossible, 
+even by the issuing server itself." 
+
+[*The issued timestamps from victor are in fact the 
+git SHA-1 commit identifiers. By examining the git log, 
+the hash or signature of the original document can be recovered 
+along with verifiable time parameters.*] 
 
