@@ -22,7 +22,7 @@ The **victor** repository shall be used as follows:
 - User produces an one-way hash of a document, say, using SHA-256.
 - That hash is posted at a reliable public site, 
   e.g. in a Bitbucket snippet or Twitter tweet with permalink.
-- That joint information is commited under the proper year/month directory.
+- That joint information is committed under the proper year/month directory.
 - Anyone can then *verify* the date and time of said hash. 
 
 The virtue of this protocol is that the document itself 
@@ -60,4 +60,36 @@ Please kindly commit a signed announcement to that effect.
 
 Reference: Bruce Schneier, *Applied Cryptography*, 
 1996 second edition, see esp. chapter 4.1.
+
+
+### Practical example
+
+Following the protocol above, we date the following hash: 
+[f1e616076764c468452169bbcf251355c397d1ee](https://github.com/rsvp/victor/blob/master/2015/10/2015-10-28-marker.txt) 
+by committing a text file to **victor** under 
+the proper year/month directory. 
+Mention of a *marker* site is minimally useful to collaborate 
+any claimed date and time (taking into account time zones). 
+In our example, supplementary information has been included:
+
+```
+https://github.com/rsvp/victor
+commit f1e616076764c468452169bbcf251355c397d1ee
+Date:   Wed, 28 Oct 2015 15:01:43 -0700
+Bump VERSION to v1.15.1028
+
+Marker: https://bitbucket.org/snippets/rsvp/9qeyL
+```
+
+We have essentially added another timestamp to our commit by a 
+third-party marker which can be verified by visiting that link. 
+Thus we can definitively conclude that any commits thereafter 
+would be dated 2015-10-28 or later. It goes without saying 
+that any true clone of victor must necessarily contain 
+the forementioned hash code. 
+
+Given a series of such commits we are building a verifiable 
+timeline built by diverse people with an ordered trace of 
+authenticity provided by open markers on the network and 
+the design of the git version control software. 
 
