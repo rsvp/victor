@@ -1,0 +1,76 @@
+#!/bin/sh
+#                   git 1.9.1   Linux 3.13.0 Ubuntu 14.04.3   Date : 2015-10-30
+#
+# _______________|  post-commit_OriginStamp : For .git/hooks/post-commit
+#
+#           Usage:  0. Transmit commit hash to BLOCKCHAIN via OriginStamp.org
+#                   1. Create your API key
+#                   2. Go to .git/hooks
+#                   3. Create or append to a file named "post-commit"
+#                   4. Add this script
+#
+#     Hash search:  http://www.originstamp.org/stamps/list
+#    Verification:  http://www.originstamp.org/s/_PUT_HASH_HERE_
+#                   Also see Verification Notes at the end of this script.
+#
+#       Published:  https://twitter.com/OriginStamp
+#     Originators:  Bela Gipp, bela@gipp.com
+#                   Herzog-Wilhelm-Str. 63, 38667 Bad Harzburg, Germany
+#  
+#                   André Gernandt, andre.gernandt@gmail.com
+#                   Delbrückstraße 61, 12051 Berlin, Germany
+#
+#    Dependencies:  Free API key from http://www.originstamp.org/developer
+#                   (Only good for 1,000,000 stamps)
+#
+#  CHANGE LOG  LATEST version available:   https://git.io/victor
+#  2015-10-30  First version from http://www.originstamp.org/git_post_commit
+
+
+api_key="c488fb8991229f6309f0cfeb188aee3b"
+#       ^Created 2015-10-30 for https://git.io/victor   
+#       ___ATTN___  GET YOUR OWN for increased collective veracity.
+
+latest_commit_hash=$(git rev-parse HEAD)
+
+echo "$latest_commit_hash" will be transmitted to OriginStamp.org
+
+
+#  OPTIONS :: see http://www.originstamp.org/developer for API details.
+#  title: a string (visible publicly, so refrain)
+
+curl -X POST -H "Content-Type: application/json"             \
+             -H "Authorization: Token token=$api_key"        \
+             -d "{\"hash_sha256\":\"$latest_commit_hash\"}"  \
+             http://www.originstamp.org/api/stamps
+
+#   hash_sha256 is not limited to SHA256 hashes; string can be even shorter.
+
+
+#  _______________ VERIFICATION NOTES
+#  
+#  You can only verify an OriginStamp after the hash is submitted to the 
+#  Bitcoin blockchain (once a day). The existence of the hash on
+#  at OriginStamp.org alone isn't a proper proof yet.
+#  
+#  For the verification of already created timestamps OriginStamp.org is not
+#  needed. All you need is:
+#  
+#       - The unhashed original file/text.
+#       - The file with the aggregated hashes that was used to 
+#         generate the Bitcoin address.
+#       - A device with internet access to access the bitcoin blockchain to 
+#         verify whether the bitcoin transaction actually took place.
+#  
+#  Take the seed, normally an aggregation of a bunch of hashes, to generate the
+#  key-pair (private/public) and by this the recipient address. 
+#  
+#  Always keep your original sources and the whole seed, submitted to you by us.
+#  With this combination (your original + seed) you can always recreate the hash
+#  again and prove that your data was part of a certain Bitcoin transaction.
+#  
+#  Never alter your original! Any change, including changing a single space, or
+#  editing the metadata will alter the hash that is unique to your original file.
+
+
+#  vim: set fileencoding=utf-8 ff=unix tw=78 ai syn=sh :
