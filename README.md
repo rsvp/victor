@@ -103,11 +103,17 @@ the design of the git version control software.
 
 ### References
 
-- Bruce Schneier, *Applied Cryptography*, 1996 second edition, see esp. chapter 4.1.
-
 - Trusted timestamping: https://en.wikipedia.org/wiki/Trusted_timestamping 
   see esp. [ANSI ASC X9.95 Standard](https://en.wikipedia.org/wiki/ANSI_ASC_X9.95_Standard) 
   and [Linked timestamping](https://en.wikipedia.org/wiki/Linked_timestamping). 
+
+- Bela Gipp, N. Meuschke, and A. Gernandt. "Decentralized Trusted Timestamping 
+  using the Crypto Currency Bitcoin," in *Proceedings of the iSchools iConference*, 
+  Newport Beach, CA, USA, 
+  [March 2015](http://www.gipp.com/wp-content/papercite-data/pdf/gipp15a.pdf) 
+  [implemented in victor v2 post-commit hook]. 
+
+- Bruce Schneier, *Applied Cryptography*, 1996 second edition, see esp. chapter 4.1.
 
 
 ### Appendix 1: Standards
