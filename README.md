@@ -55,8 +55,10 @@ in a newspaper, a 20th century practice.)
 
 You can also contribute by periodically adding a hash of 
 victor's last state to a blockchain for another source of 
-independent timestamping. 
-Please kindly commit a signed announcement to that effect. 
+independent timestamping. *New in v2:* every victor commit 
+hash can be embedded into the **Bitcoin blockchain** 
+automatically by incorporating the post-commit hook 
+posted in `bin` -- free of charge! 
 
 
 ### Practical example
