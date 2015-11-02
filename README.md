@@ -111,6 +111,7 @@ the design of the git version control software.
   using the Crypto Currency Bitcoin," in *Proceedings of the iSchools iConference*, 
   Newport Beach, CA, USA, 
   [March 2015](http://www.gipp.com/wp-content/papercite-data/pdf/gipp15a.pdf) 
+  or [arXiv:1502.04015 cs.CR](http://arxiv.org/abs/1502.04015) 
   [implemented in victor v2 post-commit hook]. 
 
 - Bruce Schneier, *Applied Cryptography*, 1996 second edition, see esp. chapter 4.1.
