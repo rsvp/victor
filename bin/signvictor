@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+#              bash 4.3.11(1)   Linux 3.13.0 Ubuntu 14.04.3   Date : 2015-11-01
+#
+# _______________|  signvictor : Sign commit timestamps of a repository.
+#
+#           Usage:  signvictor [repo_name=victor]
+#
+#        Examples:  $ ./signvictor
+#                   #  Recommend execution relative to origin/master branch.
+#
+#    Dependencies:  gpg
+#                   sha256sum
+#
+#    Git's SHA-1 commit identifiers should be cryptographically strengthened,
+#    so we sign them as a group along with a timeline to document integrity, 
+#    and also to compute the SHA-256 digest of that signed message.
+#    By their joint public publication, we encourage open verification.
+#
+#  CHANGE LOG  LATEST version available:   https://git.io/victor
+#  2015-11-01  First version.
+
+
+#           _____ PREAMBLE_v3: settings, variables, and error handling.
+#
+LC_ALL=POSIX
+#      locale means "ASCII, US English, no special rules, 
+#      output per ISO and RFC standards." 
+#      Esp. use ASCII encoding for glob and sorting characters. 
+shopt -s   extglob
+#     ^set extended glob for pattern matching.
+shopt -s   failglob
+#         ^failed pattern matching signals error.
+set -e
+#   ^errors checked: immediate exit if a command has non-zero status. 
+set -o pipefail
+#   ^exit status on fail within pipe, not (default) last command.
+set -u
+#   ^unassigned variables shall be errors.
+#    Example of default VARIABLE ASSIGNMENT:  arg1=${1:-'foo'}
+
+prependf=${1:-'victor'}
+
+
+program=${0##*/}   #  similar to using basename
+tmpf=$( mktemp     /tmp/88_${program}_tmp.XXXXXXXXXX )
+tmp2=$( mktemp     /tmp/88_${program}_tmp.XXXXXXXXXX )
+memf=$( mktemp /dev/shm/88_${program}_tmp.XXXXXXXXXX )
+errf=$( mktemp /dev/shm/88_${program}_tmp.XXXXXXXXXX )
+
+
+cleanup () {
+     #  Delete temporary files, then optionally exit given status.
+     local status=${1:-'0'}
+     rm -f $tmpf $tmp2 $memf $errf
+     [ $status = '-1' ] ||  exit $status      #  thus -1 prevents exit.
+} #--------------------------------------------------------------------
+warn () {
+     #  Message with basename to stderr.          Usage: warn "message"
+     echo -e "\n !!  ${program}: $1 "  >&2
+} #--------------------------------------------------------------------
+die () {
+     #  Exit with status of most recent command or custom status, after
+     #  cleanup and warn.      Usage: command || die "message" [status]
+     local status=${2:-"$?"}
+     cat $errf >&2
+     cleanup -1  &&   warn "$1"  &&  exit $status
+} #--------------------------------------------------------------------
+trap "die 'SIG disruption, but cleanup finished.' 114" 1 2 3 15
+#    Cleanup after INTERRUPT: 1=SIGHUP, 2=SIGINT, 3=SIGQUIT, 15=SIGTERM
+trap "die 'unhandled ERR via trap, but cleanup finished.' 116" ERR
+#    Cleanup after command failure unless it's part of a test clause.
+#
+# _______________     ::  BEGIN  Script ::::::::::::::::::::::::::::::::::::::::
+
+
+cat - > $tmpf <<EOHereDoc
+THANK YOU VERY MUCH for your contributions
+to the distributed $prependf repository.
+Each and every commit serves to strengthen
+the repository's authenticity and integrity.
+
+Selected commit timestamps have been embedded
+into the Bitcoin blockchain. To obtain the transaction
+date involving a particular HASH, please verify at
+http://www.originstamp.org/s/HASH
+
+The following are our commit timestamps on
+$(date -R --utc) UTC
+written as @UNIX_TIME seconds comma SHA-1 HASH digest
+(note: such time is submitted by committer's machine,
+and subject to further corroborating evidence):
+
+EOHereDoc
+
+
+git log --reverse --format="@%ct, %H" > $tmp2
+#                   ^show commit Unix time and its full hash, CSV format.
+#        ^commit order, not necessarily ordered by time, so...
+sort $tmp2 >> $tmpf
+echo       >> $tmpf
+
+
+warn "Do NOT sign unless current git branch is at origin/master."
+#  SIGN to prevent corruption:
+gpg --clearsign $tmpf
+
+
+#  Get hash of signed file, then rename signed file to mention that hash:
+hash=$( sha256sum "${tmpf}.asc" | awk '{ print $1 }' )
+signedf="/tmp/${prependf}_$(date -I --utc)_${hash}.txt"
+
+mv "${tmpf}.asc" $signedf
+
+echo " ::  Signed: $signedf "
+
+
+cleanup    #  Instead of: trap arg EXIT
+# _______________ EOS ::  END of Script ::::::::::::::::::::::::::::::::::::::::
+
+#  vim: set fileencoding=utf-8 ff=unix tw=78 ai syn=sh :
