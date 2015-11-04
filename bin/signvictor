@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-#              bash 4.3.11(1)   Linux 3.13.0 Ubuntu 14.04.3   Date : 2015-11-01
+#              bash 4.3.11(1)   Linux 3.13.0 Ubuntu 14.04.3   Date : 2015-11-04
 #
 # _______________|  signvictor : Sign commit timestamps of a repository.
 #
 #           Usage:  signvictor [repo_name=victor]
+#                   #  Output will appear under /tmp
 #
 #        Examples:  $ ./signvictor
 #                   #  Recommend execution relative to origin/master branch.
@@ -17,6 +18,7 @@
 #    By their joint public publication, we encourage open verification.
 #
 #  CHANGE LOG  LATEST version available:   https://git.io/victor
+#  2015-11-04  Reverse chronological order.
 #  2015-11-01  First version.
 
 
@@ -93,11 +95,11 @@ and subject to further corroborating evidence):
 EOHereDoc
 
 
-git log --reverse --format="@%ct, %H" > $tmp2
-#                   ^show commit Unix time and its full hash, CSV format.
-#        ^commit order, not necessarily ordered by time, so...
-sort $tmp2 >> $tmpf
-echo       >> $tmpf
+git log --format="@%ct, %H" > $tmp2
+#         ^show commit Unix time and its full hash, CSV format.
+#    Ordering of commit not necessarily ordered by time, so sort explicitly...
+sort --reverse  $tmp2 >> $tmpf
+echo >> $tmpf
 
 
 warn "Do NOT sign unless current git branch is at origin/master."
