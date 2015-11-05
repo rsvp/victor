@@ -1,0 +1,12 @@
+I, Alice Example of Los Angeles, thereby record the 
+SHA-256 digest of my novel, Unsolved Disappearances:
+d98722c626307fb00e728ba2ff246b7dd91b932a1e872f19a42dedee3058cc8a
+and a photo of my college friends:
+f9c8cda5be4787626905f39e2d73ca4fe9615aeb607375683921595d3bb21cc0
+on this day, Wed Nov  4 16:01:40 PST 2015.
+
+Marker: https://bitbucket.org/snippets/rsvp/bRxRA 
+
+[Alice is a fictional example for README.md 
+but the dates are real. --Victor]
+
