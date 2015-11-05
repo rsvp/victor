@@ -63,42 +63,82 @@ posted in `bin` -- free of charge!
 
 ### Practical example
 
-Following the protocol above, we date the following hash: 
-[f1e616076764c468452169bbcf251355c397d1ee](https://github.com/rsvp/victor/blob/master/2015/10/2015-10-28-marker.txt) 
-by committing a text file to **victor** under 
-the proper year/month directory. 
-Mention of a *marker* site is minimally useful to collaborate 
-any claimed date and time (taking into account time zones). 
-In our example, supplementary information has been included 
-(helpful in a search of the repository): 
+Alice has just finished her 404-page novel, 
+and would like to register its date before sending 
+it off to nine publishers for review. 
+There is also a high-resolution image she would 
+like to see on the front cover. 
 
 ```
-https://github.com/rsvp/victor
-commit f1e616076764c468452169bbcf251355c397d1ee
-Date:   Wed, 28 Oct 2015 15:01:43 -0700
-Bump VERSION to v1.15.1028
-
-Marker: https://bitbucket.org/snippets/rsvp/9qeyL
+I, Alice Example of Los Angeles, thereby record the 
+SHA-256 digest of my novel, Unsolved Disappearances:
+d98722c626307fb00e728ba2ff246b7dd91b932a1e872f19a42dedee3058cc8a
+and a photo of my college friends:
+f9c8cda5be4787626905f39e2d73ca4fe9615aeb607375683921595d3bb21cc0
+on this day, Wed Nov  4 16:01:40 PST 2015.
 ```
 
-We have essentially added another timestamp to our commit by a 
-third-party marker which can be verified by visiting that link. 
-Thus we can definitively conclude that any hash registered thereafter 
-would be dated 2015-10-28 or later. 
-Prior entries would clearly have occurred on or before said date. 
+She would like her notice to be posted on some reputable website, 
+so she makes public the following: 
+https://bitbucket.org/snippets/rsvp/bRxRA 
+which will date Alice's notice independently of her stated claim. 
 
-The encoded timestamp from victor is 
-[bdc5efb645764ec11cd6154d464c3269d47cb52a](https://github.com/rsvp/victor/commit/bdc5efb645764ec11cd6154d464c3269d47cb52a) 
-which is the SHA-1 digest produced by git of a commit 
-mentioning the hash to be registered plus any supplementary 
-information inclusive of a time marker. 
-Obviously any true clone of victor must contain 
-the forementioned hash code [$ git log]. 
+To strength the evidence of her authorship and completion date, 
+she goes to Victor and makes a pull request of her original notice 
+with added mention of the *Marker* site. 
+Alice has been authenticated by GitHub, so Victor merges 
+into the `2015/11` directory, something similar to: 
+https://github.com/rsvp/victor/commit/ebe6e6b715089430017a03f2615722f1bb29da49
 
-Given a series of such commits we are building a verifiable 
-timeline built by diverse people with an ordered trail of 
-authenticity provided by open markers on the network and 
-the design of the git version control software. 
+So now we have two more additional sources for the timeline: 
+Victor's machine and the system time at a central repository. 
+In fact, Alice has even stronger evidence because her commit is 
+sandwiched among other authenticated users with an ordered trail of 
+third-party markers publicly open for verification. 
+
+The design of *git* as version control software places Alice's 
+marker notice in a DAG, directed acyclic graph, 
+with an unique immutable SHA-1 commit 
+identifier: `ebe6e6b715089430017a03f2615722f1bb29da49` 
+which will reveal not only various date sources but also 
+the hash signatures of her original works. 
+That identifier would serve as a superb reference code in 
+Alice's communication with her prospective publishers. 
+
+As a bonus, Alice had installed the post-commit hook 
+found in Victor's bin -- which embedded her commit 
+timestamp in another blockchain, Bitcoin -- free 
+of charge:
+
+```
+ ::  hooks/post-commit: ebe6e6b715089430017a03f2615722f1bb29da49 to BLOCKCHAIN.
+{"hash_sha256":"ebe6e6b715089430017a03f2615722f1bb29da49",
+"created_at":"2015-11-05T01:10:15.648Z", 
+"updated_at":"2015-11-05T01:10:15.648Z",
+"submitted_at":null,"title":null}
+ ::  http://www.originstamp.org/s/ebe6e6b715089430017a03f2615722f1bb29da49
+[develop ebe6e6b] Add 2015-11-05-example.txt only as illustrative marker
+```
+
+Thus we have another verifiable public marker 
+http://www.originstamp.org/s/ebe6e6b715089430017a03f2615722f1bb29da49 
+which not only dated Alice's commit in real time, but also 
+will report back hours later on the blocktime, the time 
+of the confirmed Bitcoin transaction embedding her commit identifier. 
+
+In effect, Alice's signed work is *permanently* on the Bitcoin blockchain. 
+And just in case, for all the world to witness, a tweet is 
+automatically posted (discretely) regarding this event: 
+https://twitter.com/OriginStamp/status/662074416113799168 
+which would constitute the seventh timestamp! 
+
+Victor's protocol permits a timestamp to become trustworthy 
+by the chained integrity of multiple independent sources of evidence 
+which are publicly verifiable. 
+Alice did not necessarily have to reveal the full contents 
+of her novel to the world, but the means to authenticate 
+it resides in one string preserved in many backed up 
+copies of the open *victor* repository. 
 
 
 ### References
