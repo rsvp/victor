@@ -5,7 +5,7 @@
 Victor, familiar name in cryptography to denote **VERIFIER**, 
 serves to publicly timestamp hash fingerprints of files. 
 
-People sometimes need to certify that a document existed on a 
+We may need to certify that a document existed on a 
 particular date (e.g. for copyright or patent purposes). 
 If the certification process can take place publicly 
 that would certainly add veracity to the matter. 
@@ -17,13 +17,16 @@ that change becoming apparent in the commit identifiers
 (SHA-1). The explicit time of a commit is recorded by git, 
 although it relies on the accuracy of the system's local clock. 
 
-The **victor** repository shall be used as follows:
+The **victor** repository is used as follows:
 
 - User produces an one-way hash of a document, say, using SHA-256.
-- That hash is posted at a reliable public site, 
+- That hash is posted at a reliable public site ("*Marker*"), 
   e.g. in a Bitbucket snippet or Twitter tweet with permalink.
-- That joint information is committed under the proper year/month directory.
-- Anyone can then *verify* the date and time of said hash. 
+- That joint information is committed under the `time/YYYY` directory.
+- Anyone can then *verify* the date and time of said hash 
+  via the commit identifier. 
+- The commit ID is finally embedded into a distributed ledger, 
+  i.e. a public blockchain (e.g. Bitcoin), for another timestamp.
 
 The virtue of this protocol is that the document itself 
 is not stored within this repository. The user does not 
@@ -50,8 +53,6 @@ signing the public timeline of hash commits.
 The strict relative history of commits and git's cryptographic 
 hash of those commits, together with open verification, 
 are the essence of this project.
-(This is far more refined than publishing your hash 
-in a newspaper, a 20th century practice.)  
 
 You can also contribute by periodically adding a hash of 
 victor's last state to a blockchain for another source of 
@@ -87,7 +88,7 @@ To strength the evidence of her authorship and completion date,
 she goes to Victor and makes a pull request of her original notice 
 with added mention of the *Marker* site. 
 Alice has been authenticated by GitHub, so Victor merges 
-into the `2015/11` directory, something similar to: 
+into the `time/2015` directory, resulting in: 
 https://github.com/rsvp/victor/commit/ebe6e6b715089430017a03f2615722f1bb29da49
 
 So now we have two more additional sources for the timeline: 
@@ -173,9 +174,8 @@ Timestamps based on the X9.95 standard can be used to provide [*victor* comments
   [*victor timeline provides excellent approximation.*] 
 
 - Evidentiary trail of authenticity. 
-  [*A document's hash and a time marker jointly produces another hash, 
-  git's commit identifier. Has the history of git commits been tested 
-  in court for legal sufficiency?*] 
+  [*A document's hash and a time Marker jointly produces another hash, 
+  git's commit identifier.*] 
 
 "**Linked timestamping** creates tokens [*markers*] 
 which are dependent on each other, entangled into some 
@@ -185,8 +185,11 @@ Temporal order of issued timestamps is also protected by this data structure,
 making backdating of the issued timestamps impossible, 
 even by the issuing server itself." 
 
-Summary: **The issued timestamps from *victor* are in fact the 
-git SHA-1 commit identifiers. By examining the git log, 
-the hash or signature of the original document can be recovered 
-along with verifiable time parameters.**
+Summary: **The issued timestamps from *victor* are in fact 
+Git commit identifiers. By examining the git log, 
+the secure hash and signatory information of the original document can be 
+recovered along with verifiable date and time of the entries.**
 
+---
+
+Shortcut to this page: https://git.io/victor | Revision date : 2018-01-02
